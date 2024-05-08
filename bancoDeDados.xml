@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <table name="users">
+        <field name="Ids" type="integer" primaryKey="true" autoIncrement="true" unique="true" />
+        <field name="Names" type="varchar(100)" />
+        <field name="Genders" type="varchar(30)" />
+        <field name="Emails" type="varchar(100)" />
+        <field name="Passwords" type="varchar(60)" />
+        <field name="AccessLevels" type="boolean" />
+    </table>
+
+    <table name="Handbooks">
+        <field name="Ids" type="integer" primaryKey="true" autoIncrement="true" unique="true" />
+        <field name="AssociatedProductIds" type="integer" reference="Products.Ids" />
+        <field name="Names" type="varchar(100)" />
+        <field name="Descriptions" type="varchar(200)" />
+        <field name="UploadDates" type="timestamp" />
+        <field name="AdditionalFilesIds" type="integer" reference="AdditionalFiles.Ids" />
+    </table>
+
+    <table name="AssembleLine">
+        <field name="Ids" type="integer" primaryKey="true" autoIncrement="true" unique="true" />
+        <field name="Names" type="varchar(100)" />
+        <field name="Descriptions" type="varchar" />
+        <field name="AssociatedAdministratorId" type="integer" reference="users.Ids" />
+    </table>
+
+    <table name="Products">
+        <field name="Ids" type="integer" primaryKey="true" autoIncrement="true" unique="true" />
+        <field name="Names" type="varchar(100)" />
+        <field name="AssociatedAssembleLineId" type="integer" reference="AssembleLine.Ids" />
+    </table>
+
+    <table name="HandbookVersion">
+        <field name="Ids" type="integer" primaryKey="true" autoIncrement="true" unique="true" />
+        <field name="AssociatedPublicationDates" type="timestamp" />
+        <field name="AssociatedHandbookIds" type="integer" reference="Handbooks.Ids" />
+    </table>
+</database>
